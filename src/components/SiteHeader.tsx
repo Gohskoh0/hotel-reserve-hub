@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 
-export function SiteHeader({ hotelName }: { hotelName: string }) {
+export function SiteHeader({ hotelName }: { hotelName?: string }) {
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
       <div className="container-page flex h-16 items-center justify-between gap-6">
