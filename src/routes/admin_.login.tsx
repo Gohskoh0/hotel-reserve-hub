@@ -4,7 +4,7 @@ import { useState } from "react";
 import { adminLogin, adminMe } from "@/lib/admin.functions";
 import { SiteHeader } from "@/components/SiteHeader";
 
-export const Route = createFileRoute("/admin/login")({
+export const Route = createFileRoute("/admin_/login")({
   beforeLoad: async () => {
     const me = await adminMe();
     if (me.authenticated) {
