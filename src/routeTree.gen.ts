@@ -9,38 +9,200 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RoomsRouteImport } from './routes/rooms'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as PaymentCallbackRouteImport } from './routes/payment.callback'
+import { Route as BookingReferenceRouteImport } from './routes/booking.$reference'
+import { Route as BookRoomTypeIdRouteImport } from './routes/book.$roomTypeId'
+import { Route as AdminLoginRouteImport } from './routes/admin_.login'
+import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
+import { Route as AdminRoomsRouteImport } from './routes/admin.rooms'
+import { Route as AdminAccountRouteImport } from './routes/admin.account'
 
+const RoomsRoute = RoomsRouteImport.update({
+  id: '/rooms',
+  path: '/rooms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const PaymentCallbackRoute = PaymentCallbackRouteImport.update({
+  id: '/payment/callback',
+  path: '/payment/callback',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookingReferenceRoute = BookingReferenceRouteImport.update({
+  id: '/booking/$reference',
+  path: '/booking/$reference',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookRoomTypeIdRoute = BookRoomTypeIdRouteImport.update({
+  id: '/book/$roomTypeId',
+  path: '/book/$roomTypeId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin_/login',
+  path: '/admin/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminRoomsRoute = AdminRoomsRouteImport.update({
+  id: '/rooms',
+  path: '/rooms',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAccountRoute = AdminAccountRouteImport.update({
+  id: '/account',
+  path: '/account',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/contact': typeof ContactRoute
+  '/rooms': typeof RoomsRoute
+  '/admin/account': typeof AdminAccountRoute
+  '/admin/rooms': typeof AdminRoomsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/book/$roomTypeId': typeof BookRoomTypeIdRoute
+  '/booking/$reference': typeof BookingReferenceRoute
+  '/payment/callback': typeof PaymentCallbackRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
+  '/rooms': typeof RoomsRoute
+  '/admin/account': typeof AdminAccountRoute
+  '/admin/rooms': typeof AdminRoomsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/book/$roomTypeId': typeof BookRoomTypeIdRoute
+  '/booking/$reference': typeof BookingReferenceRoute
+  '/payment/callback': typeof PaymentCallbackRoute
+  '/admin': typeof AdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/contact': typeof ContactRoute
+  '/rooms': typeof RoomsRoute
+  '/admin/account': typeof AdminAccountRoute
+  '/admin/rooms': typeof AdminRoomsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin_/login': typeof AdminLoginRoute
+  '/book/$roomTypeId': typeof BookRoomTypeIdRoute
+  '/booking/$reference': typeof BookingReferenceRoute
+  '/payment/callback': typeof PaymentCallbackRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/contact'
+    | '/rooms'
+    | '/admin/account'
+    | '/admin/rooms'
+    | '/admin/settings'
+    | '/admin/login'
+    | '/book/$roomTypeId'
+    | '/booking/$reference'
+    | '/payment/callback'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/contact'
+    | '/rooms'
+    | '/admin/account'
+    | '/admin/rooms'
+    | '/admin/settings'
+    | '/admin/login'
+    | '/book/$roomTypeId'
+    | '/booking/$reference'
+    | '/payment/callback'
+    | '/admin'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/contact'
+    | '/rooms'
+    | '/admin/account'
+    | '/admin/rooms'
+    | '/admin/settings'
+    | '/admin_/login'
+    | '/book/$roomTypeId'
+    | '/booking/$reference'
+    | '/payment/callback'
+    | '/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
+  ContactRoute: typeof ContactRoute
+  RoomsRoute: typeof RoomsRoute
+  AdminLoginRoute: typeof AdminLoginRoute
+  BookRoomTypeIdRoute: typeof BookRoomTypeIdRoute
+  BookingReferenceRoute: typeof BookingReferenceRoute
+  PaymentCallbackRoute: typeof PaymentCallbackRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/rooms': {
+      id: '/rooms'
+      path: '/rooms'
+      fullPath: '/rooms'
+      preLoaderRoute: typeof RoomsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +210,91 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/payment/callback': {
+      id: '/payment/callback'
+      path: '/payment/callback'
+      fullPath: '/payment/callback'
+      preLoaderRoute: typeof PaymentCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/booking/$reference': {
+      id: '/booking/$reference'
+      path: '/booking/$reference'
+      fullPath: '/booking/$reference'
+      preLoaderRoute: typeof BookingReferenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/book/$roomTypeId': {
+      id: '/book/$roomTypeId'
+      path: '/book/$roomTypeId'
+      fullPath: '/book/$roomTypeId'
+      preLoaderRoute: typeof BookRoomTypeIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin_/login': {
+      id: '/admin_/login'
+      path: '/admin/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/rooms': {
+      id: '/admin/rooms'
+      path: '/rooms'
+      fullPath: '/admin/rooms'
+      preLoaderRoute: typeof AdminRoomsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/account': {
+      id: '/admin/account'
+      path: '/account'
+      fullPath: '/admin/account'
+      preLoaderRoute: typeof AdminAccountRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
+interface AdminRouteChildren {
+  AdminAccountRoute: typeof AdminAccountRoute
+  AdminRoomsRoute: typeof AdminRoomsRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminAccountRoute: AdminAccountRoute,
+  AdminRoomsRoute: AdminRoomsRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
+  ContactRoute: ContactRoute,
+  RoomsRoute: RoomsRoute,
+  AdminLoginRoute: AdminLoginRoute,
+  BookRoomTypeIdRoute: BookRoomTypeIdRoute,
+  BookingReferenceRoute: BookingReferenceRoute,
+  PaymentCallbackRoute: PaymentCallbackRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
