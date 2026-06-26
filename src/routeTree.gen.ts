@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as RoomsRouteImport } from './routes/rooms'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PaymentCallbackRouteImport } from './routes/payment.callback'
 import { Route as BookingReferenceRouteImport } from './routes/booking.$reference'
 import { Route as BookRoomTypeIdRouteImport } from './routes/book.$roomTypeId'
 
@@ -28,6 +29,11 @@ const ContactRoute = ContactRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PaymentCallbackRoute = PaymentCallbackRouteImport.update({
+  id: '/payment/callback',
+  path: '/payment/callback',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BookingReferenceRoute = BookingReferenceRouteImport.update({
@@ -47,6 +53,7 @@ export interface FileRoutesByFullPath {
   '/rooms': typeof RoomsRoute
   '/book/$roomTypeId': typeof BookRoomTypeIdRoute
   '/booking/$reference': typeof BookingReferenceRoute
+  '/payment/callback': typeof PaymentCallbackRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +61,7 @@ export interface FileRoutesByTo {
   '/rooms': typeof RoomsRoute
   '/book/$roomTypeId': typeof BookRoomTypeIdRoute
   '/booking/$reference': typeof BookingReferenceRoute
+  '/payment/callback': typeof PaymentCallbackRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,6 +70,7 @@ export interface FileRoutesById {
   '/rooms': typeof RoomsRoute
   '/book/$roomTypeId': typeof BookRoomTypeIdRoute
   '/booking/$reference': typeof BookingReferenceRoute
+  '/payment/callback': typeof PaymentCallbackRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -71,8 +80,15 @@ export interface FileRouteTypes {
     | '/rooms'
     | '/book/$roomTypeId'
     | '/booking/$reference'
+    | '/payment/callback'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contact' | '/rooms' | '/book/$roomTypeId' | '/booking/$reference'
+  to:
+    | '/'
+    | '/contact'
+    | '/rooms'
+    | '/book/$roomTypeId'
+    | '/booking/$reference'
+    | '/payment/callback'
   id:
     | '__root__'
     | '/'
@@ -80,6 +96,7 @@ export interface FileRouteTypes {
     | '/rooms'
     | '/book/$roomTypeId'
     | '/booking/$reference'
+    | '/payment/callback'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -88,6 +105,7 @@ export interface RootRouteChildren {
   RoomsRoute: typeof RoomsRoute
   BookRoomTypeIdRoute: typeof BookRoomTypeIdRoute
   BookingReferenceRoute: typeof BookingReferenceRoute
+  PaymentCallbackRoute: typeof PaymentCallbackRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -113,6 +131,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/payment/callback': {
+      id: '/payment/callback'
+      path: '/payment/callback'
+      fullPath: '/payment/callback'
+      preLoaderRoute: typeof PaymentCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/booking/$reference': {
       id: '/booking/$reference'
       path: '/booking/$reference'
@@ -136,6 +161,7 @@ const rootRouteChildren: RootRouteChildren = {
   RoomsRoute: RoomsRoute,
   BookRoomTypeIdRoute: BookRoomTypeIdRoute,
   BookingReferenceRoute: BookingReferenceRoute,
+  PaymentCallbackRoute: PaymentCallbackRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
