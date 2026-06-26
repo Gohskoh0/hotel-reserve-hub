@@ -4,7 +4,6 @@ import { adminMe, adminLogout } from "@/lib/admin.functions";
 
 export const Route = createFileRoute("/admin")({
   beforeLoad: async ({ location }) => {
-    if (location.pathname === "/admin/login") return;
     const me = await adminMe();
     if (!me.authenticated) throw redirect({ to: "/admin/login" });
     if (me.mustChangePassword && location.pathname !== "/admin/account") {
@@ -25,11 +24,6 @@ function AdminLayout() {
   async function onLogout() {
     await logout({});
     navigate({ to: "/admin/login" });
-  }
-
-  // Hide chrome on login page
-  if (typeof window !== "undefined" && window.location.pathname === "/admin/login") {
-    return <Outlet />;
   }
 
   return (
