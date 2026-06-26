@@ -13,6 +13,7 @@ import { Route as RoomsRouteImport } from './routes/rooms'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as PaymentCallbackRouteImport } from './routes/payment.callback'
 import { Route as BookingReferenceRouteImport } from './routes/booking.$reference'
 import { Route as BookRoomTypeIdRouteImport } from './routes/book.$roomTypeId'
@@ -38,6 +39,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
 const PaymentCallbackRoute = PaymentCallbackRouteImport.update({
   id: '/payment/callback',
   path: '/payment/callback',
@@ -61,34 +67,36 @@ const AdminLoginRoute = AdminLoginRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/contact': typeof ContactRoute
   '/rooms': typeof RoomsRoute
   '/admin/login': typeof AdminLoginRoute
   '/book/$roomTypeId': typeof BookRoomTypeIdRoute
   '/booking/$reference': typeof BookingReferenceRoute
   '/payment/callback': typeof PaymentCallbackRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
   '/contact': typeof ContactRoute
   '/rooms': typeof RoomsRoute
   '/admin/login': typeof AdminLoginRoute
   '/book/$roomTypeId': typeof BookRoomTypeIdRoute
   '/booking/$reference': typeof BookingReferenceRoute
   '/payment/callback': typeof PaymentCallbackRoute
+  '/admin': typeof AdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/contact': typeof ContactRoute
   '/rooms': typeof RoomsRoute
   '/admin_/login': typeof AdminLoginRoute
   '/book/$roomTypeId': typeof BookRoomTypeIdRoute
   '/booking/$reference': typeof BookingReferenceRoute
   '/payment/callback': typeof PaymentCallbackRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -101,16 +109,17 @@ export interface FileRouteTypes {
     | '/book/$roomTypeId'
     | '/booking/$reference'
     | '/payment/callback'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/admin'
     | '/contact'
     | '/rooms'
     | '/admin/login'
     | '/book/$roomTypeId'
     | '/booking/$reference'
     | '/payment/callback'
+    | '/admin'
   id:
     | '__root__'
     | '/'
@@ -121,11 +130,12 @@ export interface FileRouteTypes {
     | '/book/$roomTypeId'
     | '/booking/$reference'
     | '/payment/callback'
+    | '/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AdminRoute: typeof AdminRoute
+  AdminRoute: typeof AdminRouteWithChildren
   ContactRoute: typeof ContactRoute
   RoomsRoute: typeof RoomsRoute
   AdminLoginRoute: typeof AdminLoginRoute
@@ -164,6 +174,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/payment/callback': {
       id: '/payment/callback'
       path: '/payment/callback'
@@ -195,9 +212,19 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AdminRouteChildren {
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AdminRoute: AdminRoute,
+  AdminRoute: AdminRouteWithChildren,
   ContactRoute: ContactRoute,
   RoomsRoute: RoomsRoute,
   AdminLoginRoute: AdminLoginRoute,
