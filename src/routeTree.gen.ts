@@ -18,6 +18,7 @@ import { Route as PaymentCallbackRouteImport } from './routes/payment.callback'
 import { Route as BookingReferenceRouteImport } from './routes/booking.$reference'
 import { Route as BookRoomTypeIdRouteImport } from './routes/book.$roomTypeId'
 import { Route as AdminLoginRouteImport } from './routes/admin_.login'
+import { Route as AdminRoomsRouteImport } from './routes/admin.rooms'
 
 const RoomsRoute = RoomsRouteImport.update({
   id: '/rooms',
@@ -64,12 +65,18 @@ const AdminLoginRoute = AdminLoginRouteImport.update({
   path: '/admin/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoomsRoute = AdminRoomsRouteImport.update({
+  id: '/rooms',
+  path: '/rooms',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
   '/contact': typeof ContactRoute
   '/rooms': typeof RoomsRoute
+  '/admin/rooms': typeof AdminRoomsRoute
   '/admin/login': typeof AdminLoginRoute
   '/book/$roomTypeId': typeof BookRoomTypeIdRoute
   '/booking/$reference': typeof BookingReferenceRoute
@@ -80,6 +87,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/rooms': typeof RoomsRoute
+  '/admin/rooms': typeof AdminRoomsRoute
   '/admin/login': typeof AdminLoginRoute
   '/book/$roomTypeId': typeof BookRoomTypeIdRoute
   '/booking/$reference': typeof BookingReferenceRoute
@@ -92,6 +100,7 @@ export interface FileRoutesById {
   '/admin': typeof AdminRouteWithChildren
   '/contact': typeof ContactRoute
   '/rooms': typeof RoomsRoute
+  '/admin/rooms': typeof AdminRoomsRoute
   '/admin_/login': typeof AdminLoginRoute
   '/book/$roomTypeId': typeof BookRoomTypeIdRoute
   '/booking/$reference': typeof BookingReferenceRoute
@@ -105,6 +114,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/contact'
     | '/rooms'
+    | '/admin/rooms'
     | '/admin/login'
     | '/book/$roomTypeId'
     | '/booking/$reference'
@@ -115,6 +125,7 @@ export interface FileRouteTypes {
     | '/'
     | '/contact'
     | '/rooms'
+    | '/admin/rooms'
     | '/admin/login'
     | '/book/$roomTypeId'
     | '/booking/$reference'
@@ -126,6 +137,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/contact'
     | '/rooms'
+    | '/admin/rooms'
     | '/admin_/login'
     | '/book/$roomTypeId'
     | '/booking/$reference'
@@ -209,14 +221,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/rooms': {
+      id: '/admin/rooms'
+      path: '/rooms'
+      fullPath: '/admin/rooms'
+      preLoaderRoute: typeof AdminRoomsRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
 interface AdminRouteChildren {
+  AdminRoomsRoute: typeof AdminRoomsRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminRoomsRoute: AdminRoomsRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 
