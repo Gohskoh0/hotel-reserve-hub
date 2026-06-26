@@ -73,14 +73,15 @@ function BookingConfirmPage() {
         <div className="surface-card mt-8 p-6 space-y-3 text-sm">
           <Row k="Status" v={status} />
           <Row k="Payment" v={payStatus} />
-          <Row k="Room" v={booking.room_name} />
           <Row k="Check-in" v={booking.check_in} />
           <Row k="Check-out" v={booking.check_out} />
+          <Row k="Nights" v={String(booking.nights)} />
           <Row k="Rooms" v={String(booking.num_rooms)} />
           <Row k="Guests" v={String(booking.num_guests)} />
           <div className="border-t border-border pt-3" />
           <Row k="Total" v={`${sym}${Number(booking.total_amount).toLocaleString()}`} />
-          <Row k="Paid" v={`${sym}${Number(booking.paid_amount).toLocaleString()}`} />
+          <Row k="Paid" v={`${sym}${Number(booking.amount_paid).toLocaleString()}`} />
+          <Row k="Due now" v={`${sym}${Number(booking.amount_due_now).toLocaleString()}`} />
         </div>
 
         <p className="mt-8 text-sm text-muted-foreground">
