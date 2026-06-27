@@ -40,9 +40,9 @@ function RoomsPage() {
       <main className="flex-1 container-page py-16 md:py-24">
         <header className="max-w-2xl">
           <p className="field-label">Rooms & suites</p>
-          <h1 className="font-display text-4xl md:text-5xl">Find your room</h1>
+          <h1 className="font-display text-4xl md:text-6xl">Find your room</h1>
           <p className="mt-4 text-muted-foreground">
-            Every room is thoughtfully appointed for a calm, restful stay. Choose what suits you and reserve in a few clicks.
+            Choose a room and reserve in a few clicks.
           </p>
         </header>
 

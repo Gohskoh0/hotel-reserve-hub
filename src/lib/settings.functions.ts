@@ -16,15 +16,22 @@ export type PublicSettings = {
   currency: string;
   currency_symbol: string;
   paystack_public_key: string;
+  facebook_url: string;
+  plus_code: string;
+  checkout_time: string;
+  star_rating: number;
+  guest_rating: number;
+  review_count: number;
 };
+
+const PUBLIC_COLS =
+  "name, tagline, address, phone, email, hero_image_url, about, deposit_percent, currency, currency_symbol, paystack_public_key, facebook_url, plus_code, checkout_time, star_rating, guest_rating, review_count";
 
 export const getPublicSettings = createServerFn({ method: "GET" }).handler(async () => {
   const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
   const { data, error } = await supabaseAdmin
     .from("hotel_settings")
-    .select(
-      "name, tagline, address, phone, email, hero_image_url, about, deposit_percent, currency, currency_symbol, paystack_public_key",
-    )
+    .select(PUBLIC_COLS)
     .eq("id", 1)
     .single();
   if (error) throw error;
@@ -36,9 +43,7 @@ export const getAdminSettings = createServerFn({ method: "GET" }).handler(async 
   const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
   const { data, error } = await supabaseAdmin
     .from("hotel_settings")
-    .select(
-      "name, tagline, address, phone, email, hero_image_url, about, deposit_percent, currency, currency_symbol, paystack_public_key, paystack_secret_key",
-    )
+    .select(`${PUBLIC_COLS}, paystack_secret_key`)
     .eq("id", 1)
     .single();
   if (error) throw error;
@@ -62,6 +67,12 @@ const settingsSchema = z.object({
   currency: z.string().trim().min(2).max(8),
   currency_symbol: z.string().trim().min(1).max(8),
   paystack_public_key: z.string().trim().max(200).default(""),
+  facebook_url: z.string().trim().max(300).default(""),
+  plus_code: z.string().trim().max(60).default(""),
+  checkout_time: z.string().trim().max(20).default(""),
+  star_rating: z.number().int().min(0).max(5),
+  guest_rating: z.number().min(0).max(5),
+  review_count: z.number().int().min(0),
 });
 
 export const updateSettings = createServerFn({ method: "POST" })
