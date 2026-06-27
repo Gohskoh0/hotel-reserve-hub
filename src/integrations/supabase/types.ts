@@ -134,48 +134,66 @@ export type Database = {
         Row: {
           about: string
           address: string
+          checkout_time: string
           currency: string
           currency_symbol: string
           deposit_percent: number
           email: string
+          facebook_url: string
+          guest_rating: number
           hero_image_url: string
           id: number
           name: string
           paystack_public_key: string
           paystack_secret_key: string
           phone: string
+          plus_code: string
+          review_count: number
+          star_rating: number
           tagline: string
           updated_at: string
         }
         Insert: {
           about?: string
           address?: string
+          checkout_time?: string
           currency?: string
           currency_symbol?: string
           deposit_percent?: number
           email?: string
+          facebook_url?: string
+          guest_rating?: number
           hero_image_url?: string
           id?: number
           name?: string
           paystack_public_key?: string
           paystack_secret_key?: string
           phone?: string
+          plus_code?: string
+          review_count?: number
+          star_rating?: number
           tagline?: string
           updated_at?: string
         }
         Update: {
           about?: string
           address?: string
+          checkout_time?: string
           currency?: string
           currency_symbol?: string
           deposit_percent?: number
           email?: string
+          facebook_url?: string
+          guest_rating?: number
           hero_image_url?: string
           id?: number
           name?: string
           paystack_public_key?: string
           paystack_secret_key?: string
           phone?: string
+          plus_code?: string
+          review_count?: number
+          star_rating?: number
           tagline?: string
           updated_at?: string
         }
