@@ -16,15 +16,22 @@ export type PublicSettings = {
   currency: string;
   currency_symbol: string;
   paystack_public_key: string;
+  facebook_url: string;
+  plus_code: string;
+  checkout_time: string;
+  star_rating: number;
+  guest_rating: number;
+  review_count: number;
 };
+
+const PUBLIC_COLS =
+  "name, tagline, address, phone, email, hero_image_url, about, deposit_percent, currency, currency_symbol, paystack_public_key, facebook_url, plus_code, checkout_time, star_rating, guest_rating, review_count";
 
 export const getPublicSettings = createServerFn({ method: "GET" }).handler(async () => {
   const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
   const { data, error } = await supabaseAdmin
     .from("hotel_settings")
-    .select(
-      "name, tagline, address, phone, email, hero_image_url, about, deposit_percent, currency, currency_symbol, paystack_public_key",
-    )
+    .select(PUBLIC_COLS)
     .eq("id", 1)
     .single();
   if (error) throw error;
