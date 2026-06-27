@@ -65,6 +65,9 @@ function AdminSettingsPage() {
     saveM.mutate({
       ...rest,
       deposit_percent: Number(rest.deposit_percent),
+      star_rating: Number(rest.star_rating),
+      guest_rating: Number(rest.guest_rating),
+      review_count: Number(rest.review_count),
     });
   }
 
@@ -97,6 +100,27 @@ function AdminSettingsPage() {
           </Field>
           <Field label="Hero image URL" className="md:col-span-2">
             <input value={form.hero_image_url} onChange={(e) => setForm({ ...form, hero_image_url: e.target.value })} className="field-input" />
+          </Field>
+          <Field label="Facebook URL">
+            <input value={form.facebook_url} onChange={(e) => setForm({ ...form, facebook_url: e.target.value })} placeholder="https://facebook.com/..." className="field-input" />
+          </Field>
+          <Field label="Plus code">
+            <input value={form.plus_code} onChange={(e) => setForm({ ...form, plus_code: e.target.value })} className="field-input" />
+          </Field>
+          <Field label="Check-out time">
+            <input value={form.checkout_time} onChange={(e) => setForm({ ...form, checkout_time: e.target.value })} placeholder="12:00" className="field-input" />
+          </Field>
+          <Field label="Star rating (0–5)">
+            <input type="number" min={0} max={5} value={form.star_rating}
+              onChange={(e) => setForm({ ...form, star_rating: Number(e.target.value) })} className="field-input" />
+          </Field>
+          <Field label="Guest rating (0–5)">
+            <input type="number" step="0.1" min={0} max={5} value={form.guest_rating}
+              onChange={(e) => setForm({ ...form, guest_rating: Number(e.target.value) })} className="field-input" />
+          </Field>
+          <Field label="Review count">
+            <input type="number" min={0} value={form.review_count}
+              onChange={(e) => setForm({ ...form, review_count: Number(e.target.value) })} className="field-input" />
           </Field>
           <Field label="Currency code">
             <input value={form.currency} onChange={(e) => setForm({ ...form, currency: e.target.value })} className="field-input" />
