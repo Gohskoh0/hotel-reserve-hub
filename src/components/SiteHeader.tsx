@@ -9,9 +9,9 @@ export function SiteHeader({ hotelName }: { hotelName?: string }) {
           <img
             src={logo}
             alt={hotelName || "Lakewood Hotel"}
-            width={128}
-            height={48}
-            className="h-9 w-auto object-contain md:h-10"
+            width={160}
+            height={56}
+            className="h-10 w-auto object-contain md:h-12"
           />
         </Link>
         <nav className="hidden items-center gap-7 text-sm md:flex">
