@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo-horizontal.png";
 
 export function SiteHeader({ hotelName }: { hotelName?: string }) {
   return (
