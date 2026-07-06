@@ -1,6 +1,7 @@
 import { createFileRoute, Outlet, Link, redirect, useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { adminMe, adminLogout } from "@/lib/admin.functions";
+import logoMark from "@/assets/favicon.png";
 
 export const Route = createFileRoute("/admin")({
   beforeLoad: async ({ location }) => {
@@ -30,7 +31,16 @@ function AdminLayout() {
     <div className="min-h-screen bg-secondary/40">
       <header className="border-b border-border bg-background">
         <div className="container-page flex items-center justify-between py-4">
-          <Link to="/admin" className="font-display text-xl">Lakewood · Admin</Link>
+          <Link to="/admin" className="flex items-center gap-2.5">
+            <img
+              src={logoMark}
+              alt="Lakewood Hotel"
+              width={28}
+              height={28}
+              className="size-7 object-contain"
+            />
+            <span className="font-display text-xl">Lakewood · Admin</span>
+          </Link>
           <nav className="hidden md:flex items-center gap-6 text-sm">
             <Link to="/admin" activeOptions={{ exact: true }}
               activeProps={{ className: "text-foreground font-medium" }}
