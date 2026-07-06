@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import logo from "@/assets/logo.png";
 import type { PublicSettings } from "@/lib/settings.functions";
 
 export function SiteFooter({ settings }: { settings: PublicSettings }) {
@@ -6,9 +7,15 @@ export function SiteFooter({ settings }: { settings: PublicSettings }) {
     <footer className="border-t border-border bg-secondary/60 mt-24">
       <div className="container-page grid gap-10 py-16 md:grid-cols-4">
         <div className="md:col-span-2">
-          <h3 className="font-display text-2xl font-semibold">{settings.name}</h3>
+          <img
+            src={logo}
+            alt={settings.name}
+            width={160}
+            height={80}
+            className="h-16 w-auto object-contain"
+          />
           {settings.star_rating > 0 && (
-            <p className="mt-2 text-sm text-muted-foreground">
+            <p className="mt-3 text-sm text-muted-foreground">
               <span className="text-brass">{"★".repeat(settings.star_rating)}</span>
               <span className="ml-2">{settings.star_rating}-star hotel · Port Harcourt</span>
             </p>
