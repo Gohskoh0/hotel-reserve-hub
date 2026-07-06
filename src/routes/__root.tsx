@@ -77,19 +77,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lakewood Hotel — Lakeside calm, effortless hospitality" },
+      { title: "Lakewood Hotel — Port Harcourt" },
       {
         name: "description",
         content:
           "Book your stay at Lakewood Hotel. A quiet lakeside retreat with thoughtfully appointed rooms and easy online reservations.",
       },
-      { property: "og:title", content: "Lakewood Hotel" },
+      { property: "og:title", content: "Lakewood Hotel — Port Harcourt" },
       {
         property: "og:description",
         content: "Lakeside calm. Effortless hospitality. Reserve your room online.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Lakewood Hotel — Port Harcourt" },
+      { name: "description", content: "Lakewood Hotel, a 3-star stay on Agip Link Road, Port Harcourt. Browse rooms and reserve online." },
+      { property: "og:description", content: "Lakewood Hotel, a 3-star stay on Agip Link Road, Port Harcourt. Browse rooms and reserve online." },
+      { name: "twitter:description", content: "Lakewood Hotel, a 3-star stay on Agip Link Road, Port Harcourt. Browse rooms and reserve online." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/a4143dda-689d-4540-81c4-7a0e5cec5377" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/a4143dda-689d-4540-81c4-7a0e5cec5377" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
